@@ -4,13 +4,12 @@ import { customFetch } from "../utils/fetch";
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 
 export class JokeRepository {
-  async getAllJokes(): Promise<{ results: Joke[]; count: number }> {
+  async getAllJokes(): Promise<{ results: Joke[] }> {
     try {
-      const response = await customFetch(`${API_URL}/jokes/jokes/`);
+      const response = await customFetch('/api/jokes');
       const data = await response.json();
       return {
-        results: data.results,
-        count: data.count
+        results: data.results
       };
     } catch (error) {
       console.error('Error fetching jokes:', error);
@@ -20,11 +19,8 @@ export class JokeRepository {
 
   async createJoke(joke: { title: string; content: string }): Promise<Joke> {
     try {
-      const response = await customFetch(`${API_URL}/jokes/jokes/`, {
+      const response = await customFetch('/api/jokes', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(joke),
       });
       return await response.json();

@@ -2,22 +2,19 @@ import { useState, useEffect } from 'react';
 import { Joke } from '../entities/joke';
 import { JokeRepository } from '../repositories/joke.repository';
 
+const jokeRepository = new JokeRepository();
+
 export const useJokes = () => {
   const [jokes, setJokes] = useState<Joke[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [totalCount, setTotalCount] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
-  const jokeRepository = new JokeRepository();
 
   const loadJokes = async () => {
     try {
       setLoading(true);
       setError(null);
-      const { results, count } = await  jokeRepository.getAllJokes();
+      const { results } = await jokeRepository.getAllJokes();
       setJokes(results);
-      setTotalCount(count);
-      setHasMore(results.length > 0);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load jokes');
     } finally {
@@ -42,14 +39,12 @@ export const useJokes = () => {
 
   useEffect(() => {
     loadJokes();
-  });
+  }, []);
 
   return {
     jokes,
     loading,
     error,
     createJoke,
-    hasMore,
-    totalCount,
   };
 }; 
