@@ -30,14 +30,14 @@ export default function TopJokes() {
             key={joke.id}
             className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
           >
-            <h2 className="text-xl font-semibold mb-2">{joke.name}</h2>
+            <h2 className="text-xl font-semibold mb-2">{joke.title}</h2>
             <p className="text-gray-700 mb-4">{joke.content}</p>
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-500">
-                {new Date(joke.createdAt).toLocaleDateString()}
+                {new Date(joke.created_at).toLocaleDateString()}
               </span>
               <span className="text-sm text-gray-500">
-                {joke.likes} likes
+                {joke.likes_count} likes
               </span>
             </div>
           </div>

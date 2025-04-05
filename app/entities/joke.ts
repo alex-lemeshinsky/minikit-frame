@@ -1,9 +1,15 @@
+export interface User {
+  id: number;
+  fid: number;
+  username: string;
+  created_at: string;
+}
+
 export interface Joke {
-  id: string;
-  name: string;
+  id: number;
+  user: User;
+  title: string;
   content: string;
-  likes: number;
-  castId: string;
-  userFid: string;
-  createdAt: Date;
+  likes_count: number;
+  created_at: string;
 } 
