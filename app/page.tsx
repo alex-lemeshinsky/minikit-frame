@@ -7,7 +7,7 @@ import {
 } from "@coinbase/onchainkit/minikit";
 import { Name, Identity, Badge } from "@coinbase/onchainkit/identity";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import Snake from "./components/snake";
+import BottomBar from "./components/bottom-bar";
 import { useAccount } from "wagmi";
 import Check from "./svg/Check";
 
@@ -85,8 +85,8 @@ export default function App() {
           <div className="pr-1 justify-end">{saveFrameButton}</div>
         </header>
 
-        <main className="font-serif">
-          <Snake />
+        <main className="font-serif flex-1">
+          <BottomBar />
         </main>
 
         <footer className="absolute bottom-4 flex items-center w-screen max-w-[520px] justify-center">
