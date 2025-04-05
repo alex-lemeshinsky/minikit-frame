@@ -9,16 +9,16 @@ export default function BottomBar() {
   const [activeTab, setActiveTab] = useState<'top' | 'add' | 'about'>('top');
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Main Content Area */}
-      <div className="flex-1 p-4">
+    <div className="flex flex-col h-screen">
+      {/* Main Content Area - flex-1 to take all available space */}
+      <div className="flex-1 overflow-auto">
         {activeTab === 'top' && <TopJokes />}
         {activeTab === 'add' && <CreateJokeForm />}
         {activeTab === 'about' && <About />}
       </div>
 
-      {/* Bottom Navigation */}
-      <div className="flex justify-around items-center h-16 border-t border-gray-200">
+      {/* Bottom Navigation - fixed at bottom */}
+      <div className="flex justify-around items-center h-16 border-t border-gray-200 bg-white">
         <button
           onClick={() => setActiveTab('top')}
           className={`flex-1 h-full flex items-center justify-center ${
