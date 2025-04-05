@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import CreateJokeForm from './create-joke-form';
 import TopJokes from './pages/top-jokes';
 import About from './pages/about';
+import { CreateJokeForm } from './create-joke-form';
 
 export default function BottomBar() {
   const [activeTab, setActiveTab] = useState<'top' | 'add' | 'about'>('top');
@@ -18,7 +18,7 @@ export default function BottomBar() {
       </div>
 
       {/* Bottom Navigation - fixed at bottom */}
-      <div className="flex justify-around items-center h-16 border-t border-gray-200 bg-white pb-4">
+      <div className="flex justify-around items-center h- border-t border-gray-200 bg-white pb-10">
         <button
           onClick={() => setActiveTab('top')}
           className={`flex-1 h-full flex items-center justify-center ${

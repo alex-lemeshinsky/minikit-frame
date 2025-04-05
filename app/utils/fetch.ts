@@ -3,7 +3,7 @@ export async function customFetch(url: string, options: RequestInit = {}) {
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    ...(isNgrok ? { 'ngrok-skip-browser-warning': 'true' } : {}),
+    'ngrok-skip-browser-warning': 'true',
     ...options.headers,
   };
 
