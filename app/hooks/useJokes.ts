@@ -22,11 +22,15 @@ export const useJokes = () => {
     }
   };
 
-  const createJoke = async (title: string, content: string) => {
+  const createJoke = async (title: string, content: string, userId: number) => {
     try {
       setLoading(true);
       setError(null);
-      const newJoke = await jokeRepository.createJoke({ title, content });
+      const newJoke = await jokeRepository.createJoke({ 
+        title, 
+        content,
+        user: userId
+      });
       setJokes(prev => [newJoke, ...prev]);
       return newJoke;
     } catch (err) {

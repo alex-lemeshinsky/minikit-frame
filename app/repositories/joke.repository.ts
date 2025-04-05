@@ -17,7 +17,7 @@ export class JokeRepository {
     }
   }
 
-  async createJoke(joke: { title: string; content: string }): Promise<Joke> {
+  async createJoke(joke: { title: string; content: string; user: number }): Promise<Joke> {
     try {
       const response = await customFetch('/api/jokes', {
         method: 'POST',

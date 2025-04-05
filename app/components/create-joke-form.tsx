@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-// import { useJokes } from '../hooks/useJokes';
 import { ConnectWallet } from '@coinbase/onchainkit/wallet';
 import { useMiniKit } from '@coinbase/onchainkit/minikit';
+import { useJokes } from '../hooks/useJokes';
 
 export const CreateJokeForm = () => {
-  const { isConnected } = useAccount();
-  // const { createJoke } = useJokes();
-  const { setFrameReady } = useMiniKit();
+  const { isConnected, address } = useAccount();
+  const { context } = useMiniKit();
+  const { createJoke } = useJokes();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,12 +21,25 @@ export const CreateJokeForm = () => {
       return;
     }
 
+    if (!address) {
+      console.error('No address found');
+      return;
+    }
+
+    const fid = context?.user?.fid;
+    if (!fid) {
+      console.error('No Farcaster ID found');
+      return;
+    }
+
     try {
       setIsSubmitting(true);
       
+      await createJoke(title, content, fid);
+      
       // Create Farcaster post
       const farcasterPost = {
-        text: `${title}\n\n${content}\n\nPlease like and share this joke 🙏\n\n#joke`,
+        text: `${title}\n\n${content}\n\n#JOKE`,
         embeds: [],
       };
 
@@ -85,7 +98,7 @@ export const CreateJokeForm = () => {
       </div>
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || !address}
         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
       >
         {isSubmitting ? 'Creating...' : 'Create Joke & Share on Farcaster'}
@@ -93,3 +106,7 @@ export const CreateJokeForm = () => {
     </form>
   );
 };
+
+function setFrameReady() {
+  throw new Error('Function not implemented.');
+}

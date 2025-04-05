@@ -51,17 +51,7 @@ export default function Header() {
       <div className="justify-start pl-1">
         {address && farcasterUser ? (
           <div className="flex items-center space-x-2">
-            {farcasterUser.pfpUrl && (
-              <div className="w-8 h-8 rounded-full overflow-hidden">
-                <Image
-                  src={farcasterUser.pfpUrl}
-                  alt={farcasterUser.username ?? "Avatar"}
-                  width={32}
-                  height={32}
-                  className="object-cover"
-                />
-              </div>
-            )}
+            
             <span className="font-semibold text-sm">
               {farcasterUser.username}
             </span>
